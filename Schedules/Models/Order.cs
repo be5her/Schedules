@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,16 +9,21 @@ namespace Schedules.Models
 {
     public class Order
     {
+        [Key]
         public int Id { get; set; }
 
+        [ForeignKey("School")]
         public int School_id { get; set; }
 
+        [ForeignKey("Client")]
         public int Client_id { get; set; }
 
+        [ForeignKey("Semester")]
         public int Semester_id { get; set; }
 
         public DateTime Order_date { get; set; }
 
+        [Required]
         public int Number_of_teachers { get; set; }
 
         public decimal Total_price { get; set; }
@@ -35,6 +42,7 @@ namespace Schedules.Models
 
         public decimal Remaining_amount { get; set; }
 
+        [ForeignKey("AspNetUsers")]
         public int Added_by { get; set; }
 
         public string Notes { get; set; }
