@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Schedules_classes.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.School_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Semester_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_of_teachers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_after_discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Haraj_percentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Net_profit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paid_amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remaining_amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Added_by)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.School_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semester_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number_of_teachers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total_after_discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Haraj_percentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Net_profit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paid_amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remaining_amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Added_by)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

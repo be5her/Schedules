@@ -16,27 +16,27 @@ namespace Schedules.Data
 
         }
 
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Client> Client { get; set; }
 
-        public DbSet<Channel> Channels { get; set; }
+        public DbSet<Channel> Channel { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Order { get; set; }
 
         public DbSet<Order_Services> Order_Services { get; set; }
 
         public DbSet<Order_Workers> Order_Workers { get; set; }
 
-        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Payment> Payment { get; set; }
 
-        public DbSet<School> Schools { get; set; }
+        public DbSet<School> School { get; set; }
 
-        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<Semester> Semester { get; set; }
 
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Service> Service { get; set; }
 
-        public DbSet<Stage> Stages { get; set; }
+        public DbSet<Stage> Stage { get; set; }
 
-        public DbSet<Worker> Workers { get; set; }
+        public DbSet<Worker> Worker { get; set; }
 
     }
 }
