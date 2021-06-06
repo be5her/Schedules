@@ -50,20 +50,20 @@
         </EntityType>
         <EntityType Name="Order_Services">
           <Key>
-            <PropertyRef Name="Order_id" />
-            <PropertyRef Name="Service_id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Order_id" Type="int" Nullable="false" />
-          <Property Name="Service_id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Order_id" Type="int" />
+          <Property Name="Service_id" Type="int" />
           <Property Name="Current_price" Type="decimal" Precision="10" Scale="3" />
         </EntityType>
         <EntityType Name="Order_Workers">
           <Key>
-            <PropertyRef Name="Order_id" />
-            <PropertyRef Name="Worker_id" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Order_id" Type="int" Nullable="false" />
-          <Property Name="Worker_id" Type="int" Nullable="false" />
+          <Property Name="Service_id" Type="int" />
           <Property Name="Task_name" Type="nvarchar(max)" />
           <Property Name="Cost" Type="decimal" Precision="10" Scale="3" />
         </EntityType>
@@ -181,7 +181,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Services_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Order_Services" Type="Self.Order_Services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -193,7 +193,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Services_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="Order_Services" Type="Self.Order_Services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
@@ -217,14 +217,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Workers_Worker">
-          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Worker" Type="Self.Worker" Multiplicity="0..1" />
           <End Role="Order_Workers" Type="Self.Order_Workers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Worker">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Order_Workers">
-              <PropertyRef Name="Worker_id" />
+              <PropertyRef Name="Service_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,22 +381,22 @@
         </EntityType>
         <EntityType Name="Order_Services">
           <Key>
-            <PropertyRef Name="Order_id" />
-            <PropertyRef Name="Service_id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Order_id" Type="Int32" Nullable="false" />
-          <Property Name="Service_id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Order_id" Type="Int32" />
+          <Property Name="Service_id" Type="Int32" />
           <Property Name="Current_price" Type="Decimal" Precision="10" Scale="3" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Services_Order" FromRole="Order_Services" ToRole="Order" />
           <NavigationProperty Name="Service" Relationship="Self.FK_Order_Services_Service" FromRole="Order_Services" ToRole="Service" />
         </EntityType>
         <EntityType Name="Order_Workers">
           <Key>
-            <PropertyRef Name="Order_id" />
-            <PropertyRef Name="Worker_id" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Order_id" Type="Int32" Nullable="false" />
-          <Property Name="Worker_id" Type="Int32" Nullable="false" />
+          <Property Name="Service_id" Type="Int32" />
           <Property Name="Task_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Cost" Type="Decimal" Precision="10" Scale="3" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Workers_Order" FromRole="Order_Workers" ToRole="Order" />
@@ -536,7 +536,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Services_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Order_Services" Type="Self.Order_Services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -572,7 +572,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Services_Service">
-          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
           <End Role="Order_Services" Type="Self.Order_Services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Service">
@@ -584,14 +584,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Workers_Worker">
-          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Worker" Type="Self.Worker" Multiplicity="0..1" />
           <End Role="Order_Workers" Type="Self.Order_Workers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Worker">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Order_Workers">
-              <PropertyRef Name="Worker_id" />
+              <PropertyRef Name="Service_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -719,6 +719,7 @@
           <EntitySetMapping Name="Order_Services">
             <EntityTypeMapping TypeName="Model.Order_Services">
               <MappingFragment StoreEntitySet="Order_Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_id" ColumnName="Order_id" />
                 <ScalarProperty Name="Service_id" ColumnName="Service_id" />
                 <ScalarProperty Name="Current_price" ColumnName="Current_price" />
@@ -728,8 +729,9 @@
           <EntitySetMapping Name="Order_Workers">
             <EntityTypeMapping TypeName="Model.Order_Workers">
               <MappingFragment StoreEntitySet="Order_Workers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_id" ColumnName="Order_id" />
-                <ScalarProperty Name="Worker_id" ColumnName="Worker_id" />
+                <ScalarProperty Name="Service_id" ColumnName="Service_id" />
                 <ScalarProperty Name="Task_name" ColumnName="Task_name" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
               </MappingFragment>

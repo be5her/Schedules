@@ -14,8 +14,9 @@ namespace Schedules_classes
     
     public partial class Order_Workers
     {
+        public int Id { get; set; }
         public int Order_id { get; set; }
-        public int Worker_id { get; set; }
+        public Nullable<int> Service_id { get; set; }
         public string Task_name { get; set; }
         public Nullable<decimal> Cost { get; set; }
     

@@ -12,12 +12,11 @@ namespace Schedules_classes
     using System;
     using System.Collections.Generic;
     
-
     public partial class Order_Services
     {
-
-        public int Order_id { get; set; }
-        public int Service_id { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> Order_id { get; set; }
+        public Nullable<int> Service_id { get; set; }
         public Nullable<decimal> Current_price { get; set; }
     
         public virtual Order Order { get; set; }

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schedules", "Schedules\Schedules.csproj", "{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedules_classes", "Schedules_classes\Schedules_classes.csproj", "{2EF1FA2F-4021-4269-823C-3F03FF873E85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedules_classes", "Schedules_classes\Schedules_classes.csproj", "{27095A30-E461-45B6-95DA-3026345E0FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EF1FA2F-4021-4269-823C-3F03FF873E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EF1FA2F-4021-4269-823C-3F03FF873E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EF1FA2F-4021-4269-823C-3F03FF873E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EF1FA2F-4021-4269-823C-3F03FF873E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27095A30-E461-45B6-95DA-3026345E0FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27095A30-E461-45B6-95DA-3026345E0FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27095A30-E461-45B6-95DA-3026345E0FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27095A30-E461-45B6-95DA-3026345E0FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

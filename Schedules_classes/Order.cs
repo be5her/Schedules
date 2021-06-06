@@ -12,7 +12,7 @@ namespace Schedules_classes
     using System;
     using System.Collections.Generic;
     
-    public class Order
+    public partial class Order
     {
         public Order()
         {
