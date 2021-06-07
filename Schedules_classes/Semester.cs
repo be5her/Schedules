@@ -11,7 +11,8 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Semester
     {
         public Semester()
@@ -19,7 +20,10 @@ namespace Schedules_classes
             this.Orders = new HashSet<Order>();
         }
     
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Code { get; set; }
         public string Title { get; set; }
         public string Added_by { get; set; }

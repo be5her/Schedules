@@ -11,7 +11,9 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Client
     {
         public Client()
@@ -20,9 +22,14 @@ namespace Schedules_classes
             this.Schools = new HashSet<School>();
         }
     
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
         public string Phone { get; set; }
+
+        [ForeignKey("Channel")]
         public Nullable<int> Channel_id { get; set; }
         public string Email { get; set; }
         public string Added_by { get; set; }

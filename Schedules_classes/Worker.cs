@@ -11,7 +11,8 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Worker
     {
         public Worker()
@@ -19,6 +20,7 @@ namespace Schedules_classes
             this.Order_Workers = new HashSet<Order_Workers>();
         }
     
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

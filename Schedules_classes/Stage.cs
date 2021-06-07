@@ -11,7 +11,8 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Stage
     {
         public Stage()
@@ -19,7 +20,10 @@ namespace Schedules_classes
             this.Schools = new HashSet<School>();
         }
     
+        [Key]
         public int Id { get; set; }
+        
+        [Required]
         public string Name { get; set; }
         public string Added_by { get; set; }
         public Nullable<System.DateTime> Added_date { get; set; }

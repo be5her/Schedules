@@ -28,4 +28,9 @@
     <ProjectReference Include="..\Schedules_classes\Schedules_classes.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\NewFolder1\" />
+    <Folder Include="wwwroot\js\NewFolder\" />
+  </ItemGroup>
+
 </Project>

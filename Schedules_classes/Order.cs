@@ -11,7 +11,9 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Order
     {
         public Order()
@@ -21,9 +23,16 @@ namespace Schedules_classes
             this.Payments = new HashSet<Payment>();
         }
     
+        [Key]
         public int Id { get; set; }
+
+        [ForeignKey("School")]
         public Nullable<int> School_id { get; set; }
+
+        [ForeignKey("Client")]
         public Nullable<int> Client_id { get; set; }
+
+        [ForeignKey("Semester")]
         public Nullable<int> Semester_id { get; set; }
         public Nullable<System.DateTime> Order_date { get; set; }
         public Nullable<int> Number_of_teachers { get; set; }

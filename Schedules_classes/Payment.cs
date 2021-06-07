@@ -11,10 +11,15 @@ namespace Schedules_classes
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Payment
     {
+        [Key]
         public int Id { get; set; }
+
+        [ForeignKey("Order")]
         public Nullable<int> Order_id { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string Method { get; set; }
