@@ -22,9 +22,9 @@ namespace Schedules.Data
 
         public DbSet<Order> Order { get; set; }
 
-        public DbSet<Order_Services> Order_Services { get; set; }
+        public DbSet<Order_services> Order_Services { get; set; }
 
-        public DbSet<Order_Workers> Order_Workers { get; set; }
+        public DbSet<Order_workers> Order_Workers { get; set; }
 
         public DbSet<Payment> Payment { get; set; }
 
