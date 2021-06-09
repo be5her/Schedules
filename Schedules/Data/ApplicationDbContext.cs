@@ -16,6 +16,8 @@ namespace Schedules.Data
 
         }
 
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
         public DbSet<Client> Client { get; set; }
 
         public DbSet<Channel> Channel { get; set; }
@@ -37,6 +39,5 @@ namespace Schedules.Data
         public DbSet<Stage> Stage { get; set; }
 
         public DbSet<Worker> Worker { get; set; }
-
     }
 }

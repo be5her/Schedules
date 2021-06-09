@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Schedules_classes;
 
 namespace Schedules.Controllers
 {
+    [Authorize]
     public class ChannelsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -54,7 +56,7 @@ namespace Schedules.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Channel_id,Name,Added_date,Added_by")] Channel channel)
+        public async Task<IActionResult> Create([Bind("Name,Added_by")] Channel channel)
         {
             if (ModelState.IsValid)
             {
