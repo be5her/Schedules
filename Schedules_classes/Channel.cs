@@ -32,7 +32,10 @@ namespace Schedules_classes
 
         [ForeignKey("AspNetUsers")]
         public string Added_by { get; set; }
-    
+
+        [NotMapped]
+        public string Added_by_name { get; set; }
+
         public virtual ICollection<Client> Clients { get; set; }
     }
 }

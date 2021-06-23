@@ -24,7 +24,13 @@ namespace Schedules.Controllers
         // GET: Channels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Channel.ToListAsync());
+            var Channels = await _context.Channel.ToListAsync();
+            foreach(var channel in Channels)
+            {
+                var user = _context.ApplicationUser.FromSqlRaw(string.Format("Select * from AspNetUsers where Id = '{0}'", channel.Added_by)).ToList();
+                channel.Added_by_name = user[0].Full_name();
+            }
+            return View(Channels);
         }
 
         // GET: Channels/Details/5

@@ -20,7 +20,7 @@ namespace Schedules.Models
 
         public string Last_name { get; set; }
 
-        public string Name()
+        public string Full_name()
         {
             return First_name + " " + Last_name;
         }
