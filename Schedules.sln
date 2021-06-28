@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schedules", "Schedules\Schedules.csproj", "{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "Schedules\View.csproj", "{4522D8F1-4F18-4C30-9489-4AA98FF1CC83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schedules_classes", "Schedules_classes\Schedules_classes.csproj", "{321205FD-EDD6-4534-AB5C-E22D4CEBB63D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "Schedules_classes\DB.csproj", "{321205FD-EDD6-4534-AB5C-E22D4CEBB63D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{3F6FEECC-6CE9-490D-8928-A27E8E0C6BE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{321205FD-EDD6-4534-AB5C-E22D4CEBB63D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{321205FD-EDD6-4534-AB5C-E22D4CEBB63D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{321205FD-EDD6-4534-AB5C-E22D4CEBB63D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F6FEECC-6CE9-490D-8928-A27E8E0C6BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6FEECC-6CE9-490D-8928-A27E8E0C6BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6FEECC-6CE9-490D-8928-A27E8E0C6BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F6FEECC-6CE9-490D-8928-A27E8E0C6BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

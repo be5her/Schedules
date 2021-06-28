@@ -54,80 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Channel.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Classes.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Classes.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Client.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Order.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Order_services.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Order_workers.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Payment.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
+    <Compile Include="AspNetUser.cs" />
+    <Compile Include="Channel.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="DB.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Order_services.cs" />
+    <Compile Include="Order_workers.cs" />
+    <Compile Include="Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="School.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Semester.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Service.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Stage.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Worker.cs">
-      <DependentUpon>Classes.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Classes.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Classes.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="School.cs" />
+    <Compile Include="Semester.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="Stage.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Classes.edmx.diagram">
-      <DependentUpon>Classes.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Classes.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Classes.Context.cs</LastGenOutput>
-      <DependentUpon>Classes.edmx</DependentUpon>
-    </Content>
-    <Content Include="Classes.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Classes.edmx</DependentUpon>
-      <LastGenOutput>Classes.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

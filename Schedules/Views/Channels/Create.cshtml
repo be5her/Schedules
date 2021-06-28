@@ -1,9 +1,5 @@
 ﻿@model Schedules_classes.Channel
 
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
 @{
     ViewData["Title"] = "Create";
 }
@@ -22,15 +18,15 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <label asp-for="Added_date" class="control-label"></label>
-                    <input asp-for="Added_date" class="form-control" />
-                    <span asp-validation-for="Added_date" class="text-danger"></span>
-                </div>*@
-            <div class="form-group" hidden>
+                <label asp-for="Added_date" class="control-label"></label>
+                <input asp-for="Added_date" class="form-control" />
+                <span asp-validation-for="Added_date" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
                 <label asp-for="Added_by" class="control-label"></label>
-                <input asp-for="Added_by" class="form-control" value="@UserManager.GetUserAsync(User).Result.Id"/>
+                <input asp-for="Added_by" class="form-control" />
                 <span asp-validation-for="Added_by" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

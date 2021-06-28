@@ -36,7 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Schedules_classes\Schedules_classes.csproj" />
+    <ProjectReference Include="..\Logic\Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\DB\" />
   </ItemGroup>
 
 </Project>
