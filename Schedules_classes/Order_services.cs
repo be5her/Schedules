@@ -8,10 +8,13 @@ namespace Schedules_classes
 
     public partial class Order_services
     {
+        [Key]
         public int Id { get; set; }
 
+        [ForeignKey("Order")]
         public int? Order_id { get; set; }
 
+        [ForeignKey("Service")]
         public int? Service_id { get; set; }
 
         public decimal? Current_Price { get; set; }

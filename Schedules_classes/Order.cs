@@ -20,10 +20,13 @@ namespace Schedules_classes
         [Key]
         public int Order_id { get; set; }
 
+        [ForeignKey("School")]
         public int? School_id { get; set; }
 
+        [ForeignKey("Client")]
         public int? Client_id { get; set; }
 
+        [ForeignKey("Semester")]
         public int? Semester_id { get; set; }
 
         public DateTime? Order_date { get; set; }
@@ -49,6 +52,7 @@ namespace Schedules_classes
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal? Remaining_amount { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 

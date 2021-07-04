@@ -21,6 +21,7 @@ namespace Schedules_classes
             Workers = new HashSet<Worker>();
         }
 
+        [Key]
         [StringLength(450)]
         public string Id { get; set; }
 
@@ -32,6 +33,8 @@ namespace Schedules_classes
 
         [StringLength(100)]
         public string Last_name { get; set; }
+
+        public string Full_name { get {return this.First_name + " " + this.Last_name;} }
 
         [StringLength(256)]
         public string NormalizedUserName { get; set; }

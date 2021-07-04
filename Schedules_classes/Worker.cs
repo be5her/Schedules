@@ -27,6 +27,7 @@ namespace Schedules_classes
         [StringLength(10)]
         public string Phone { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 

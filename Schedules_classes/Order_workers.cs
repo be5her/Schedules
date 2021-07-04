@@ -8,10 +8,14 @@ namespace Schedules_classes
 
     public partial class Order_workers
     {
+        [Key]
         public int Id { get; set; }
 
+
+        [ForeignKey("Order")]
         public int? Order_id { get; set; }
 
+        [ForeignKey("Worker")]
         public int? Worker_id { get; set; }
 
         public string Task_name { get; set; }

@@ -28,14 +28,19 @@ namespace Schedules_classes
         [StringLength(50)]
         public string Email { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 
         public DateTime? Added_date { get; set; }
 
+        [ForeignKey("Channel")]
         public int? Channel_id { get; set; }
 
         public string Notes { get; set; }
+
+        [NotMapped]
+        public string Added_by_name { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 

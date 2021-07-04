@@ -21,6 +21,7 @@ namespace Schedules_classes
         [Required]
         public string Name { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 

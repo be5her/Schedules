@@ -20,6 +20,8 @@ namespace Schedules.Data
 
         public DbSet<Schedules_classes.Channel> Channel { get; set; }
 
+        public DbSet<Schedules_classes.Client> Client { get; set; }
+
         //public DbSet<Client> Client { get; set; }
 
         //public DbSet<Channel> Channel { get; set; }

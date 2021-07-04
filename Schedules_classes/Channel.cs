@@ -24,11 +24,12 @@ namespace Schedules_classes
 
         public DateTime? Added_date { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 
         [NotMapped]
-        public string Added_by_name {get; set;}
+        public string Added_by_name { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 

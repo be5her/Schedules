@@ -12,6 +12,7 @@ namespace Schedules_classes
         [Key]
         public int Payment_id { get; set; }
 
+        [ForeignKey("Order")]
         public int Order_id { get; set; }
 
         public decimal Amount { get; set; }

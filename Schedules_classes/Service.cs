@@ -23,6 +23,7 @@ namespace Schedules_classes
 
         public decimal? Price { get; set; }
 
+        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 

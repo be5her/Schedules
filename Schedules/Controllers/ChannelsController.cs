@@ -18,28 +18,21 @@ namespace View.Controllers
     {
 
         // GET: Channels
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(ChannelModel.GetAll());
+            return View(await ChannelModel.GetAllAsync());
         }
 
         // GET: Channels/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var channel = await _context.Channel
-        //        .FirstOrDefaultAsync(m => m.Channel_id == id);
-        //    if (channel == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(channel);
-        //}
+        public async Task<IActionResult> DetailsAsync(int? id)
+        {
+            var channel = await ChannelModel.GetChannelAsync(id);
+            if (channel == null)
+            {
+                return NotFound();
+            }
+            return View(channel);
+        }
 
         // GET: Channels/Create
         public IActionResult Create()
@@ -64,84 +57,56 @@ namespace View.Controllers
         }
 
         // GET: Channels/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var channel = await _context.Channel.FindAsync(id);
-        //    if (channel == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(channel);
-        //}
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var channel = await ChannelModel.GetChannelAsync(id);
+            if (channel == null)
+            {
+                return NotFound();
+            }
+            return View(channel);
+        }
 
         // POST: Channels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Channel_id,Name,Added_date,Added_by")] Channel channel)
-        //{
-        //    if (id != channel.Channel_id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(channel);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ChannelExists(channel.Channel_id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(channel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int Channel_id, string Name)
+        {
+            if (await ChannelModel.UpdateAsync(Channel_id, Name))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
+        }
 
         // GET: Channels/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var channel = await _context.Channel
-        //        .FirstOrDefaultAsync(m => m.Channel_id == id);
-        //    if (channel == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(channel);
-        //}
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var channel = await ChannelModel.GetChannelAsync(id);
+            if (channel == null)
+            {
+                return NotFound();
+            }
+            return View(channel);
+        }
 
         // POST: Channels/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var channel = await _context.Channel.FindAsync(id);
-        //    _context.Channel.Remove(channel);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (await ChannelModel.DeleteAsync(id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
+        }
 
         //private bool ChannelExists(int id)
         //{
