@@ -14,11 +14,9 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var clients = await _context.Clients.Include(c => c.Channel).ToListAsync();
-                foreach (var client in clients)
-                {
-                    client.Added_by_name = client.AspNetUser.Full_name;
-                }
+                var clients = await _context.Clients.Include(c => c.AspNetUser)
+                                                    .Include(c => c.Channel)
+                                                    .ToListAsync();
                 return clients;
             }
         }
@@ -27,48 +25,34 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var client = await _context.Clients.SingleOrDefaultAsync(m => m.Cleint_id == id);
-                client.Added_by_name = client.AspNetUser.Full_name;
+                var client = await _context.Clients.Include(c => c.AspNetUser)
+                                                   .Include(c => c.Channel)
+                                                   .FirstOrDefaultAsync(m => m.Cleint_id == id);
                 return client;
             }
         }
 
-        public static async Task<bool> CreateAsync(string name, string phone, string email, string added_by, int channel_id, string notes)
+        public static async Task<bool> CreateAsync(Client client)
         {
             using (var _context = new DB())
             {
-                var client = new Client()
-                {
-                    Name = name,
-                    Phone = phone,
-                    Email = email,
-                    Added_by = added_by,
-                    Channel_id = channel_id,
-                    Added_date = DateTime.Now,
-                    Notes = notes
-                };
                 _context.Clients.Add(client);
                 await _context.SaveChangesAsync();
                 return true;
             }
         }
 
-        public static async Task<bool> UpdateAsync(int id, string name, string phone, string email, int channel_id, string notes)
+        public static async Task<bool> UpdateAsync(Client client)
         {
             using (var _context = new DB())
             {
-                var client = await _context.Clients.SingleOrDefaultAsync(e => e.Cleint_id == id);
-                if (client == null)
+                if (await _context.Clients.FirstOrDefaultAsync(e => e.Cleint_id == client.Cleint_id) != null)
                 {
-                    return false;
+                    _context.Entry(client).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return true;
                 }
-                client.Name = name;
-                client.Phone = phone;
-                client.Email = email;
-                client.Channel_id = channel_id;
-                client.Notes = notes;
-                await _context.SaveChangesAsync();
-                return true;
+                return false;
             }
         }
 

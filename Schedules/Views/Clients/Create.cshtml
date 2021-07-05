@@ -27,16 +27,15 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Added_by" class="control-label"></label>
-                <input asp-for="Added_by" class="form-control" />
-                <span asp-validation-for="Added_by" class="text-danger"></span>
+                <select asp-for="Added_by" class ="form-control" asp-items="ViewBag.Added_by"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Added_date" class="control-label"></label>
                 <input asp-for="Added_date" class="form-control" />
                 <span asp-validation-for="Added_date" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Channel_id" class="control-label"></label>
                 <select asp-for="Channel_id" class ="form-control" asp-items="ViewBag.Channel_id"></select>

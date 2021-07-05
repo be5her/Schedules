@@ -1,28 +1,25 @@
 ﻿@model IEnumerable<Schedules_classes.Channel>
 
 @{
-    ViewData["Title"] = "قائمة القنوات";
+    ViewData["Title"] = "Index";
 }
 
-<h1>القائمة</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">إضافة قناة</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.Name)*@
-                الاسم
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Added_date)*@
-                تاريخ الإضافة
+                @Html.DisplayNameFor(model => model.Added_date)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Added_by)*@
-                أضيف بواسطة
+                @Html.DisplayNameFor(model => model.AspNetUser)
             </th>
             <th></th>
         </tr>
@@ -37,12 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Added_date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Added_by_name)
+                @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Channel_id">تحرير</a> |
-                <a asp-action="Details" asp-route-id="@item.Channel_id">تفاصيل</a> |
-                <a asp-action="Delete" asp-route-id="@item.Channel_id">حذف</a>
+                <a asp-action="Edit" asp-route-id="@item.Channel_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Channel_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Channel_id">Delete</a>
             </td>
         </tr>
 }

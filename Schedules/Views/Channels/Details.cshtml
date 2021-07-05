@@ -1,39 +1,36 @@
 ﻿@model Schedules_classes.Channel
 
 @{
-    ViewData["Title"] = "تفاصيل قناة";
+    ViewData["Title"] = "Details";
 }
 
-<h1>تفاصيل</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>قناة</h4>
+    <h4>Channel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Name)*@
-            الاسم
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Added_date)*@
-            تاريخ الإضافة
+            @Html.DisplayNameFor(model => model.Added_date)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Added_date)
         </dd>
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Added_by)*@
-            أضيف بواسطة
+            @Html.DisplayNameFor(model => model.AspNetUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Added_by_name)
+            @Html.DisplayFor(model => model.AspNetUser.Full_name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Channel_id">تحرير</a> |
-    <a asp-action="Index">عودة للقائمة</a>
+    <a asp-action="Edit" asp-route-id="@Model.Channel_id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

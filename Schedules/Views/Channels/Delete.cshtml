@@ -1,42 +1,39 @@
 ﻿@model Schedules_classes.Channel
 
 @{
-    ViewData["Title"] = "حذف قناة";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>حذف</h1>
+<h1>Delete</h1>
 
-<h3>هل أنت متأكد من عملية الحذف؟</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>قناة</h4>
+    <h4>Channel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Name)*@
-            الاسم
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Added_date)*@
-            تاريخ الإضافة
+            @Html.DisplayNameFor(model => model.Added_date)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Added_date)
         </dd>
         <dt class = "col-sm-2">
-            @*@Html.DisplayNameFor(model => model.Added_by)*@
-            أضيف بواسطة
+            @Html.DisplayNameFor(model => model.AspNetUser)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Added_by_name)
-        </dd>
+            @Html.DisplayFor(model => model.AspNetUser.Full_name)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Channel_id" />
-        <input type="submit" value="حذف" class="btn btn-danger" /> |
-        <a asp-action="Index">عودة للقائمة</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
     </form>
 </div>

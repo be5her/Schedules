@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Logic.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -33,22 +34,18 @@ namespace View.Controllers
             {
                 return NotFound();
             }
-
-            var client = await _context.Client
-                .Include(c => c.Channel)
-                .FirstOrDefaultAsync(m => m.Cleint_id == id);
+            var client = await ClientModel.GetClientAsync(id);
             if (client == null)
             {
                 return NotFound();
             }
-
             return View(client);
         }
 
         // GET: Clients/Create
         public IActionResult Create()
         {
-            ViewData["Channel_id"] = new SelectList(_context.Channel, "Channel_id", "Name");
+            ViewData["Channel_id"] = ChannelModel.GetSelectList();
             return View();
         }
 
@@ -57,15 +54,17 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Cleint_id,Name,Phone,Email,Added_by,Added_date,Channel_id,Notes")] Client client)
+        public async Task<IActionResult> Create([Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            client.Added_by = userId;
+            client.Added_date = DateTime.Now;
             if (ModelState.IsValid)
             {
-                _context.Add(client);
-                await _context.SaveChangesAsync();
+                await ClientModel.CreateAsync(client);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Channel_id"] = new SelectList(_context.Channel, "Channel_id", "Name", client.Channel_id);
+            ViewData["Channel_id"] = ChannelModel.GetSelectList();
             return View(client);
         }
 
@@ -77,12 +76,12 @@ namespace View.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Client.FindAsync(id);
+            var client = await ClientModel.GetClientAsync(id);
             if (client == null)
             {
                 return NotFound();
             }
-            ViewData["Channel_id"] = new SelectList(_context.Channel, "Channel_id", "Name", client.Channel_id);
+            ViewData["Channel_id"] = ChannelModel.GetSelectList(client.Channel_id);
             return View(client);
         }
 
@@ -91,7 +90,7 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Cleint_id,Name,Phone,Email,Added_by,Added_date,Channel_id,Notes")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client)
         {
             if (id != client.Cleint_id)
             {
@@ -100,25 +99,12 @@ namespace View.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                if (await ClientModel.UpdateAsync(client))
                 {
-                    _context.Update(client);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClientExists(client.Cleint_id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["Channel_id"] = new SelectList(_context.Channel, "Channel_id", "Name", client.Channel_id);
+            ViewData["Channel_id"] = ChannelModel.GetSelectList(client.Channel_id);
             return View(client);
         }
 
@@ -130,9 +116,7 @@ namespace View.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Client
-                .Include(c => c.Channel)
-                .FirstOrDefaultAsync(m => m.Cleint_id == id);
+            var client = await ClientModel.GetClientAsync(id);
             if (client == null)
             {
                 return NotFound();
@@ -146,15 +130,12 @@ namespace View.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var client = await _context.Client.FindAsync(id);
-            _context.Client.Remove(client);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (await ClientModel.DeleteAsync(id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
         }
 
-        private bool ClientExists(int id)
-        {
-            return _context.Client.Any(e => e.Cleint_id == id);
-        }
     }
 }

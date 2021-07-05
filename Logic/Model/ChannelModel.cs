@@ -1,4 +1,6 @@
-﻿using Schedules_classes;
+﻿
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Schedules_classes;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,12 +16,8 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var channels = await _context.Channels.ToListAsync();
-                foreach (var channel in channels)
-                {
-                    channel.Added_by_name = channel.AspNetUser.Full_name;
-                }
-                return channels;
+                var applicationDbContext = _context.Channels.Include(c => c.AspNetUser);
+                return await applicationDbContext.ToListAsync();
             }
         }
 
@@ -27,22 +25,17 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var channel = await _context.Channels.SingleOrDefaultAsync(m => m.Channel_id == id);
-                channel.Added_by_name = channel.AspNetUser.Full_name;
+                var channel = await _context.Channels
+                .Include(c => c.AspNetUser)
+                .FirstOrDefaultAsync(m => m.Channel_id == id);
                 return channel;
             }
         }
 
-        public static async Task<bool> CreateAsync(string name, string added_by)
+        public static async Task<bool> CreateAsync(Channel channel)
         {
             using (var _context = new DB())
             {
-                var channel = new Channel()
-                {
-                    Name = name,
-                    Added_by = added_by,
-                    Added_date = DateTime.Now
-                };
                 _context.Channels.Add(channel);
                 await _context.SaveChangesAsync();
                 return true;
@@ -58,7 +51,7 @@ namespace Logic.Model
                 {
                     return false;
                 }
-                    channel.Name = name;
+                channel.Name = name;
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -81,6 +74,32 @@ namespace Logic.Model
                 _context.Channels.Remove(channel);
                 await _context.SaveChangesAsync();
                 return true;
+            }
+        }
+
+        public static List<SelectListItem> GetSelectList(int? selected = null)
+        {
+            using (var _context = new DB())
+            {
+                List<SelectListItem> list;
+                if (selected == null)
+                {
+                    list = new SelectList(_context.Channels, "Channel_id", "Name").ToList();
+                }
+                else 
+                { 
+                    list = new SelectList(_context.Channels, "Channel_id", "Name", selected).ToList();
+                }
+                return list;
+            }
+        }
+
+        public static async Task<bool> ChannelExistsAsync(Channel channel)
+        {
+            using (var _context = new DB())
+            {
+                Channel _channel = await _context.Channels.FirstOrDefaultAsync(e => e.Channel_id == channel.Channel_id);
+                return _channel != null;
             }
         }
     }

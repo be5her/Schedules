@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Logic.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Schedules.Data;
 using Schedules_classes;
-using Logic.Model;
-using Microsoft.AspNetCore.Identity;
-using Schedules.Models;
-using System.Security.Claims;
 
 namespace View.Controllers
 {
     public class ChannelsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public ChannelsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         // GET: Channels
         public async Task<IActionResult> Index()
@@ -24,13 +28,19 @@ namespace View.Controllers
         }
 
         // GET: Channels/Details/5
-        public async Task<IActionResult> DetailsAsync(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var channel = await ChannelModel.GetChannelAsync(id);
             if (channel == null)
             {
                 return NotFound();
             }
+
             return View(channel);
         }
 
@@ -45,25 +55,33 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string Name)
+        public async Task<IActionResult> Create([Bind("Channel_id,Name")] Channel channel)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (await ChannelModel.CreateAsync(Name, userId))
+            channel.Added_by = userId;
+            channel.Added_date = DateTime.Now;
+            if (ModelState.IsValid)
             {
+                await ChannelModel.CreateAsync(channel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(Name);
+            return View(channel);
         }
 
         // GET: Channels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var channel = await ChannelModel.GetChannelAsync(id);
             if (channel == null)
             {
                 return NotFound();
             }
+            //ViewData["Added_by"] = new SelectList(_context.Set<AspNetUser>(), "Id", "Id", channel.Added_by);
             return View(channel);
         }
 
@@ -72,13 +90,19 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Channel_id, string Name)
+        public async Task<IActionResult> Edit(int id, [Bind("Channel_id,Name")] Channel channel)
         {
-            if (await ChannelModel.UpdateAsync(Channel_id, Name))
+            if (id != channel.Channel_id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await ChannelModel.UpdateAsync(id, channel.Name);
                 return RedirectToAction(nameof(Index));
             }
-            return NotFound();
+            return View(channel);
         }
 
         // GET: Channels/Delete/5
@@ -88,11 +112,13 @@ namespace View.Controllers
             {
                 return NotFound();
             }
+
             var channel = await ChannelModel.GetChannelAsync(id);
             if (channel == null)
             {
                 return NotFound();
             }
+
             return View(channel);
         }
 
@@ -101,16 +127,9 @@ namespace View.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (await ChannelModel.DeleteAsync(id))
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return NotFound();
+            await ChannelModel.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        //private bool ChannelExists(int id)
-        //{
-        //    return _context.Channel.Any(e => e.Channel_id == id);
-        //}
     }
 }

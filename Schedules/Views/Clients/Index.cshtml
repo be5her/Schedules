@@ -22,13 +22,13 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Added_by)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Added_date)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUser)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Channel)
@@ -49,13 +49,13 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Added_by)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Added_date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Channel.Name)
