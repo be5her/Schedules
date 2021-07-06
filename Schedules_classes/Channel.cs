@@ -28,9 +28,6 @@ namespace Schedules_classes
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        [NotMapped]
-        public string Added_by_name { get; set; }
-
         public virtual AspNetUser AspNetUser { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

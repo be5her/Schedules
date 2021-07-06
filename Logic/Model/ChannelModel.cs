@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Schedules_classes;
 using System;
 using System.Collections.Generic;

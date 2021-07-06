@@ -24,7 +24,7 @@ namespace Schedules_classes
 
         public string Title { get; set; }
 
-        public bool? Is_active { get; set; }
+        public bool Is_active { get; set; }
 
         [ForeignKey("AspNetUser")]
         [StringLength(450)]

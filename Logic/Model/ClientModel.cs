@@ -1,4 +1,5 @@
-﻿using Schedules_classes;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Schedules_classes;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,11 +33,23 @@ namespace Logic.Model
             }
         }
 
-        public static async Task<bool> CreateAsync(Client client)
+        public static async Task<bool> CreateAsync(Client client, string channel_name)
         {
             using (var _context = new DB())
             {
-                _context.Clients.Add(client);
+                if (client.Channel_id == null)
+                {
+                    Channel c = new Channel();
+                    c.Name = channel_name;
+                    c.Added_by = client.Added_by;
+                    c.Added_date = client.Added_date;
+                    c.Clients.Add(client);
+                    _context.Channels.Add(c);
+                } else
+                {
+                    _context.Clients.Add(client);
+                }
+
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -46,9 +59,14 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                if (await _context.Clients.FirstOrDefaultAsync(e => e.Cleint_id == client.Cleint_id) != null)
+                var _client = await _context.Clients.FirstOrDefaultAsync(e => e.Cleint_id == client.Cleint_id);
+                if (_client != null)
                 {
-                    _context.Entry(client).State = EntityState.Modified;
+                    _client.Channel_id = client.Channel_id;
+                    _client.Email = client.Email;
+                    _client.Name = client.Name;
+                    _client.Phone = client.Phone;
+                    _client.Notes = client.Notes;
                     await _context.SaveChangesAsync();
                     return true;
                 }
@@ -78,6 +96,23 @@ namespace Logic.Model
                 _context.Clients.Remove(client);
                 await _context.SaveChangesAsync();
                 return true;
+            }
+        }
+
+        public static List<SelectListItem> GetSelectList(int? selected = null)
+        {
+            using (var _context = new DB())
+            {
+                List<SelectListItem> list;
+                if (selected == null)
+                {
+                    list = new SelectList(_context.Clients, "Client_id", "Name").ToList();
+                }
+                else
+                {
+                    list = new SelectList(_context.Clients, "Client_id", "Name", selected).ToList();
+                }
+                return list;
             }
         }
     }

@@ -12,63 +12,56 @@ using Schedules_classes;
 
 namespace View.Controllers
 {
-    public class ClientsController : Controller
+    public class SemestersController : Controller
     {
-        private readonly ApplicationDbContext _context;
 
-        public ClientsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: Clients
+        // GET: Semesters
         public async Task<IActionResult> Index()
         {
-            return View(await ClientModel.GetAllAsync());
+            return View(await SemesterModel.GetAllAsync());
         }
 
-        // GET: Clients/Details/5
+        // GET: Semesters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var client = await ClientModel.GetClientAsync(id);
-            if (client == null)
+
+            var semester = await SemesterModel.GetSemesterAsync(id);
+            if (semester == null)
             {
                 return NotFound();
             }
-            return View(client);
+
+            return View(semester);
         }
 
-        // GET: Clients/Create
+        // GET: Semesters/Create
         public IActionResult Create()
         {
-            ViewData["Channel_id"] = ChannelModel.GetSelectList();
             return View();
         }
 
-        // POST: Clients/Create
+        // POST: Semesters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client, string Channel_name)
+        public async Task<IActionResult> Create([Bind("Semester_id,Code,Title,Is_active")] Semester semester)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            client.Added_by = userId;
-            client.Added_date = DateTime.Now;
+            semester.Added_by = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            semester.Added_date = DateTime.Now;
             if (ModelState.IsValid)
             {
-                await ClientModel.CreateAsync(client, Channel_name);
+                await SemesterModel.CreateAsync(semester);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Channel_id"] = ChannelModel.GetSelectList();
-            return View(client);
+            return View(semester);
         }
 
-        // GET: Clients/Edit/5
+        // GET: Semesters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,39 +69,37 @@ namespace View.Controllers
                 return NotFound();
             }
 
-            var client = await ClientModel.GetClientAsync(id);
-            if (client == null)
+            var semester = await SemesterModel.GetSemesterAsync(id);
+            if (semester == null)
             {
                 return NotFound();
             }
-            ViewData["Channel_id"] = ChannelModel.GetSelectList(client.Channel_id);
-            return View(client);
+            return View(semester);
         }
 
-        // POST: Clients/Edit/5
+        // POST: Semesters/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("Semester_id,Code,Title,Is_active")] Semester semester)
         {
-            if (id != client.Cleint_id)
+            if (id != semester.Semester_id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                if (await ClientModel.UpdateAsync(client))
+                if (await SemesterModel.UpdateAsync(semester))
                 {
                     return RedirectToAction(nameof(Index));
                 }
             }
-            ViewData["Channel_id"] = ChannelModel.GetSelectList(client.Channel_id);
-            return View(client);
+            return View(semester);
         }
 
-        // GET: Clients/Delete/5
+        // GET: Semesters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,25 +107,22 @@ namespace View.Controllers
                 return NotFound();
             }
 
-            var client = await ClientModel.GetClientAsync(id);
-            if (client == null)
+            var semester = await SemesterModel.GetSemesterAsync(id);
+            if (semester == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(semester);
         }
 
-        // POST: Clients/Delete/5
+        // POST: Semesters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (await ClientModel.DeleteAsync(id))
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return NotFound();
+            await SemesterModel.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
     }

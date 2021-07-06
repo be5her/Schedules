@@ -254,6 +254,7 @@
   <ItemGroup>
     <Compile Include="Model\ChannelModel.cs" />
     <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\SemesterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

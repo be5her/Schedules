@@ -39,9 +39,6 @@ namespace Schedules_classes
 
         public string Notes { get; set; }
 
-        [NotMapped]
-        public string Added_by_name { get; set; }
-
         public virtual AspNetUser AspNetUser { get; set; }
 
         public virtual Channel Channel { get; set; }
