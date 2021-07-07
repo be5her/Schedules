@@ -321,7 +321,7 @@ namespace Schedules.Data.Migrations
 
             modelBuilder.Entity("Schedules_classes.Client", b =>
                 {
-                    b.Property<int>("Cleint_id")
+                    b.Property<int>("Client_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -357,7 +357,7 @@ namespace Schedules.Data.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.HasKey("Cleint_id");
+                    b.HasKey("Client_id");
 
                     b.HasIndex("AspNetUserId");
 
@@ -380,7 +380,7 @@ namespace Schedules.Data.Migrations
                     b.Property<string>("AspNetUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ClientCleint_id")
+                    b.Property<int?>("ClientClient_id")
                         .HasColumnType("int");
 
                     b.Property<int?>("Client_id")
@@ -438,7 +438,7 @@ namespace Schedules.Data.Migrations
 
                     b.HasIndex("AspNetUserId");
 
-                    b.HasIndex("ClientCleint_id");
+                    b.HasIndex("ClientClient_id");
 
                     b.HasIndex("School_id1");
 
@@ -558,7 +558,7 @@ namespace Schedules.Data.Migrations
                     b.Property<string>("AspNetUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ClientCleint_id")
+                    b.Property<int?>("ClientClient_id")
                         .HasColumnType("int");
 
                     b.Property<int?>("Client_id")
@@ -584,7 +584,7 @@ namespace Schedules.Data.Migrations
 
                     b.HasIndex("AspNetUserId");
 
-                    b.HasIndex("ClientCleint_id");
+                    b.HasIndex("ClientClient_id");
 
                     b.HasIndex("Stage_id1");
 
@@ -805,7 +805,7 @@ namespace Schedules.Data.Migrations
 
                     b.HasOne("Schedules_classes.Client", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientCleint_id");
+                        .HasForeignKey("ClientClient_id");
 
                     b.HasOne("Schedules_classes.School", "School")
                         .WithMany("Orders")
@@ -853,7 +853,7 @@ namespace Schedules.Data.Migrations
 
                     b.HasOne("Schedules_classes.Client", "Client")
                         .WithMany("Schools")
-                        .HasForeignKey("ClientCleint_id");
+                        .HasForeignKey("ClientClient_id");
 
                     b.HasOne("Schedules_classes.Stage", "Stage")
                         .WithMany("Schools")

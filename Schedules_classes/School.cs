@@ -27,7 +27,7 @@ namespace Schedules_classes
         [ForeignKey("Client")]
         public int? Client_id { get; set; }
 
-        public bool? Is_joined { get; set; }
+        public bool Is_joined { get; set; }
 
         [ForeignKey("AspNetUser")]
         [StringLength(450)]

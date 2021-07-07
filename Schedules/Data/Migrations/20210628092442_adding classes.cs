@@ -165,7 +165,7 @@ namespace Schedules.Data.Migrations
                 name: "Client",
                 columns: table => new
                 {
-                    Cleint_id = table.Column<int>(nullable: false)
+                    Client_id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     Phone = table.Column<string>(maxLength: 10, nullable: true),
@@ -179,7 +179,7 @@ namespace Schedules.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Client", x => x.Cleint_id);
+                    table.PrimaryKey("PK_Client", x => x.Client_id);
                     table.ForeignKey(
                         name: "FK_Client_AspNetUser_AspNetUserId",
                         column: x => x.AspNetUserId,
@@ -208,7 +208,7 @@ namespace Schedules.Data.Migrations
                     Added_date = table.Column<DateTime>(nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     AspNetUserId = table.Column<string>(nullable: true),
-                    ClientCleint_id = table.Column<int>(nullable: true),
+                    ClientClient_id = table.Column<int>(nullable: true),
                     Stage_id1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -221,10 +221,10 @@ namespace Schedules.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_School_Client_ClientCleint_id",
-                        column: x => x.ClientCleint_id,
+                        name: "FK_School_Client_ClientClient_id",
+                        column: x => x.ClientClient_id,
                         principalTable: "Client",
-                        principalColumn: "Cleint_id",
+                        principalColumn: "Client_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_School_Stage_Stage_id1",
@@ -256,7 +256,7 @@ namespace Schedules.Data.Migrations
                     Added_by = table.Column<string>(maxLength: 450, nullable: true),
                     Notes = table.Column<string>(nullable: true),
                     AspNetUserId = table.Column<string>(nullable: true),
-                    ClientCleint_id = table.Column<int>(nullable: true),
+                    ClientClient_id = table.Column<int>(nullable: true),
                     School_id1 = table.Column<int>(nullable: true),
                     Semester_id1 = table.Column<int>(nullable: true)
                 },
@@ -270,10 +270,10 @@ namespace Schedules.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_Client_ClientCleint_id",
-                        column: x => x.ClientCleint_id,
+                        name: "FK_Order_Client_ClientClient_id",
+                        column: x => x.ClientClient_id,
                         principalTable: "Client",
-                        principalColumn: "Cleint_id",
+                        principalColumn: "Client_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Order_School_School_id1",
@@ -392,9 +392,9 @@ namespace Schedules.Data.Migrations
                 column: "AspNetUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ClientCleint_id",
+                name: "IX_Order_ClientClient_id",
                 table: "Order",
-                column: "ClientCleint_id");
+                column: "ClientClient_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_School_id1",
@@ -437,9 +437,9 @@ namespace Schedules.Data.Migrations
                 column: "AspNetUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_School_ClientCleint_id",
+                name: "IX_School_ClientClient_id",
                 table: "School",
-                column: "ClientCleint_id");
+                column: "ClientClient_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_School_Stage_id1",

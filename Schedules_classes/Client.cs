@@ -17,7 +17,7 @@ namespace Schedules_classes
         }
 
         [Key]
-        public int Cleint_id { get; set; }
+        public int Client_id { get; set; }
 
         [Required]
         public string Name { get; set; }

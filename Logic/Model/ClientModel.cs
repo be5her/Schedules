@@ -28,7 +28,7 @@ namespace Logic.Model
             {
                 var client = await _context.Clients.Include(c => c.AspNetUser)
                                                    .Include(c => c.Channel)
-                                                   .FirstOrDefaultAsync(m => m.Cleint_id == id);
+                                                   .FirstOrDefaultAsync(m => m.Client_id == id);
                 return client;
             }
         }
@@ -39,13 +39,16 @@ namespace Logic.Model
             {
                 if (client.Channel_id == null)
                 {
-                    Channel c = new Channel();
-                    c.Name = channel_name;
-                    c.Added_by = client.Added_by;
-                    c.Added_date = client.Added_date;
-                    c.Clients.Add(client);
-                    _context.Channels.Add(c);
-                } else
+                    Channel channel = new Channel
+                    {
+                        Name = channel_name,
+                        Added_by = client.Added_by,
+                        Added_date = client.Added_date
+                    };
+                    channel.Clients.Add(client);
+                    _context.Channels.Add(channel);
+                }
+                else
                 {
                     _context.Clients.Add(client);
                 }
@@ -59,7 +62,7 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var _client = await _context.Clients.FirstOrDefaultAsync(e => e.Cleint_id == client.Cleint_id);
+                var _client = await _context.Clients.FirstOrDefaultAsync(e => e.Client_id == client.Client_id);
                 if (_client != null)
                 {
                     _client.Channel_id = client.Channel_id;
@@ -78,7 +81,7 @@ namespace Logic.Model
         {
             using (var _context = new DB())
             {
-                var client = await _context.Clients.SingleOrDefaultAsync(e => e.Cleint_id == id);
+                var client = await _context.Clients.SingleOrDefaultAsync(e => e.Client_id == id);
                 if (client == null)
                 {
                     return false;

@@ -72,11 +72,10 @@
 
     function selectChange(e) {
         let value = e.target.value;
-        console.log(value);
         if (value == '') {
-            $(".Channel_name").removeAttr('disabled');
+            $(".channel_info").removeAttr('disabled');
         } else {
-            $(".Channel_name").attr('disabled', 'disabled');
+            $(".channel_info").attr('disabled', 'disabled');
         }
     }
 </script>

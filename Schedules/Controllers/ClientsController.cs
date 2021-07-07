@@ -54,7 +54,7 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client, string Channel_name)
+        public async Task<IActionResult> Create([Bind("Client_id,Name,Phone,Email,Channel_id,Notes")] Client client, string Channel_name)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             client.Added_by = userId;
@@ -90,9 +90,9 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Cleint_id,Name,Phone,Email,Channel_id,Notes")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("Client_id,Name,Phone,Email,Channel_id,Notes")] Client client)
         {
-            if (id != client.Cleint_id)
+            if (id != client.Client_id)
             {
                 return NotFound();
             }

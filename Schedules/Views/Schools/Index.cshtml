@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Schedules_classes.Client>
+﻿@model IEnumerable<Schedules_classes.School>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Is_joined)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Added_date)
@@ -31,7 +28,10 @@
                 @Html.DisplayNameFor(model => model.AspNetUser)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Channel)
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stage)
             </th>
             <th></th>
         </tr>
@@ -43,10 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.Is_joined)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Added_date)
@@ -58,12 +55,15 @@
                 @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Channel.Name)
+                @Html.DisplayFor(modelItem => item.Client.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Client_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Client_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Client_id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Stage.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.School_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.School_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.School_id">Delete</a>
             </td>
         </tr>
 }

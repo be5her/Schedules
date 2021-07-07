@@ -24,6 +24,8 @@ namespace Schedules.Data
 
         public DbSet<Schedules_classes.Semester> Semester { get; set; }
 
+        public DbSet<Schedules_classes.School> School { get; set; }
+
         //public DbSet<Client> Client { get; set; }
 
         //public DbSet<Channel> Channel { get; set; }
