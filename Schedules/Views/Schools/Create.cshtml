@@ -1,4 +1,4 @@
-﻿@model Schedules_classes.School
+﻿@model Logic.ViewModel.SchoolView
 
 @{
     ViewData["Title"] = "Create";
@@ -13,9 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="School_name" class="control-label"></label>
+                <input asp-for="School_name" class="form-control" />
+                <span asp-validation-for="School_name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Stage_id" class="control-label"></label>
@@ -24,8 +24,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label name="Stage_name" class="control-label">Stage_name</label>
-                <input name="Stage_name" class="form-control stage_info" />
+                <label asp-for="Stage_name" class="control-label">Stage_name</label>
+                <input asp-for="Stage_name" class="form-control stage_info" />
                 @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
             </div>
             <div class="form-group">
@@ -35,19 +35,19 @@
                 </select>
             </div>
             <div class="form-group">
-                <label name="Client_name" class="control-label">Client_name</label>
-                <input name="Client_name" class="form-control client_info" />
+                <label asp-for="Client_name" class="control-label">Client_name</label>
+                <input asp-for="Client_name" class="form-control client_info" />
                 @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label name="Channel_id" class="control-label">Channel_id</label>
-                <select name="Channel_id" class="form-control" asp-items="ViewBag.Channel_id" id="Channel_select">
+                <label asp-for="Channel_id" class="control-label">Channel_id</label>
+                <select asp-for="Channel_id" class="form-control" asp-items="ViewBag.Channel_id" id="Channel_select">
                     <option value="">Other</option>
                 </select>
             </div>
             <div class="form-group">
-                <label name="Channel_name" class="control-label">Channel_name</label>
-                <input name="Channel_name" class="form-control channel_info" />
+                <label asp-for="Channel_name" class="control-label">Channel_name</label>
+                <input asp-for="Channel_name" class="form-control channel_info" />
                 @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
             </div>
             <div class="form-group">

@@ -259,6 +259,8 @@
     <Compile Include="Model\ServiceModel.cs" />
     <Compile Include="Model\StageModal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\OrderView.cs" />
+    <Compile Include="ViewModel\SchoolView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Schedules_classes\DB.csproj">

@@ -26,6 +26,8 @@ namespace Schedules.Data
 
         public DbSet<Schedules_classes.School> School { get; set; }
 
+        public DbSet<Schedules_classes.Service> Service { get; set; }
+
         //public DbSet<Client> Client { get; set; }
 
         //public DbSet<Channel> Channel { get; set; }

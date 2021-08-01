@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Logic.Model;
+using Logic.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -52,26 +53,22 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Stage_id,Client_id,Is_joined,Notes")] School school,
-                                                string Stage_name,
-                                                string Client_name,
-                                                int? Channel_id,
-                                                string Channel_name)
+        public async Task<IActionResult> Create([Bind("School_name,Stage_id,Stage_name,Client_id,Client_name,Is_joined,Channel_id,Channel_name,Notes")] SchoolView SchoolView)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            school.Added_by = userId;
-            school.Added_date = DateTime.Now;
+            SchoolView.Added_by = userId;
+            SchoolView.Added_date = DateTime.Now;
             
 
             if (ModelState.IsValid)
             {
-                await SchoolModel.CreateAsync(school, Stage_name, Client_name, Channel_id, Channel_name);
+                await SchoolModel.CreateAsync(SchoolView);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Client_id"] = ClientModel.GetSelectList(school.Client_id);
-            ViewData["Stage_id"] = StageModal.GetSelectList(school.Stage_id);
-            ViewData["Channel_id"] = ChannelModel.GetSelectList(school.Stage_id);
-            return View(school);
+            ViewData["Client_id"] = ClientModel.GetSelectList(SchoolView.Client_id);
+            ViewData["Stage_id"] = StageModal.GetSelectList(SchoolView.Stage_id);
+            ViewData["Channel_id"] = ChannelModel.GetSelectList(SchoolView.Stage_id);
+            return View(SchoolView);
         }
 
         // GET: Schools/Edit/5
@@ -97,16 +94,16 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("School_id,Name,Stage_id,Client_id,Is_joined,Notes")] School school)
+        public async Task<IActionResult> Edit(int id, [Bind("School_id,School_name,Stage_id,Stage_name,Client_id,Client_name,Is_joined,Channel_id,Channel_name,Notes")] SchoolView SchoolView)
         {
-            if (id != school.School_id)
+            if (id != SchoolView.School_id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                if (await SchoolModel.UpdateAsync(school))
+                if (await SchoolModel.UpdateAsync(SchoolView))
                 {
                     return RedirectToAction(nameof(Index));
                 } else
@@ -114,9 +111,9 @@ namespace View.Controllers
                     return NotFound();
                 }
             }
-            ViewData["Client_id"] = ClientModel.GetSelectList(school.Client_id);
-            ViewData["Stage_id"] = StageModal.GetSelectList(school.Stage_id);
-            return View(school);
+            ViewData["Client_id"] = ClientModel.GetSelectList(SchoolView.Client_id);
+            ViewData["Stage_id"] = StageModal.GetSelectList(SchoolView.Stage_id);
+            return View(SchoolView);
         }
 
         // GET: Schools/Delete/5

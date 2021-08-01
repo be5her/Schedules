@@ -1,4 +1,4 @@
-﻿@model Schedules_classes.School
+﻿@model Logic.ViewModel.SchoolView
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,50 +11,50 @@
     <h4>School</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.School_name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.School_name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Is_joined)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Is_joined)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Added_date)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Added_date)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Notes)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Notes)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AspNetUser)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Added_by_name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AspNetUser.Full_name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Added_by_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Client_name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.Name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stage)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stage_name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stage.Name)
-        </dd class>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stage_name)
+        </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="School_id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Logic.ViewModel;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Schedules_classes;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,43 @@ namespace Logic.Model
 {
     public class SchoolModel
     {
-        public static async Task<List<School>> GetAllAsync()
+        public static async Task<List<SchoolView>> GetAllAsync()
         {
             using (var _context = new DB())
             {
                 var schools = await _context.Schools.Include(s => s.AspNetUser)
                                                     .Include(s => s.Client)
+                                                    .Include(s => s.Client.Channel)
                                                     .Include(s => s.Stage)
                                                     .ToListAsync();
-                return schools;
+                var schoolsView = new List<SchoolView>(schools.Count);
+                foreach (var school in schools)
+                {
+                    schoolsView.Add(new SchoolView
+                    {
+                        School_id = school.School_id,
+                        School_name = school.Name,
+                        Stage_id = school.Stage_id,
+                        Stage_name = school.Stage.Name,
+                        Client_id = school.Client_id,
+                        Client_name = school.Client.Name,
+                        Client_phone = school.Client.Phone,
+                        Client_email = school.Client.Email,
+                        Is_joined = school.Is_joined,
+                        Channel_id = school.Client.Channel_id,
+                        Channel_name = school.Client.Channel.Name,
+                        Added_by = school.Added_by,
+                        Added_by_name = school.AspNetUser.Full_name,
+                        Added_date = school.Added_date,
+                        Notes = school.Notes
+                    });
+                }
+
+                return schoolsView;
             }
         }
 
-        public static async Task<School> GetSchoolAsync(int? id)
+        public static async Task<SchoolView> GetSchoolAsync(int? id)
         {
             using (var _context = new DB())
             {
@@ -32,31 +57,58 @@ namespace Logic.Model
                 .Include(s => s.Client)
                 .Include(s => s.Stage)
                 .FirstOrDefaultAsync(m => m.School_id == id);
-                return school;
+                var schoolView = new SchoolView
+                {
+                    School_id = school.School_id,
+                    School_name = school.Name,
+                    Stage_id = school.Stage_id,
+                    Stage_name = school.Stage.Name,
+                    Client_id = school.Client_id,
+                    Client_name = school.Client.Name,
+                    Client_phone = school.Client.Phone,
+                    Client_email = school.Client.Email,
+                    Is_joined = school.Is_joined,
+                    Channel_id = school.Client.Channel_id,
+                    Channel_name = school.Client.Channel.Name,
+                    Added_by = school.Added_by,
+                    Added_by_name = school.AspNetUser.Full_name,
+                    Added_date = school.Added_date,
+                    Notes = school.Notes
+                };
+                return schoolView;
             }
         }
 
-        public static async Task<bool> CreateAsync(School school, string stage_name, string client_name, int? channel_id, string channel_name)
+        public static async Task<bool> CreateAsync(SchoolView SchoolView)
         {
+            var school = new School
+            {
+                Name = SchoolView.School_name,
+                Stage_id = SchoolView.Stage_id,
+                Client_id = SchoolView.Client_id,
+                Is_joined = SchoolView.Is_joined,
+                Added_by = SchoolView.Added_by,
+                Added_date = SchoolView.Added_date,
+                Notes = SchoolView.Notes
+
+            };
             using (var _context = new DB())
             {
-                if (school.Client_id == null)
+                if (SchoolView.Client_id == null)
                 {
                     Client client = new Client
                     {
-                        Name = client_name,
-                        Added_by = school.Added_by,
-                        Added_date = school.Added_date,
-                        Channel_id = channel_id
+                        Name = SchoolView.Client_name,
+                        Added_by = SchoolView.Added_by,
+                        Added_date = SchoolView.Added_date,
+                        Channel_id = SchoolView.Channel_id
                     };
-                    //await ClientModel.CreateAsync(client, channel_name);
-                    //school.Client_id = client.Client_id;
 
                     if (client.Channel_id == null)
                     {
                         Channel channel = new Channel
                         {
-                            Name = channel_name,
+                            Name = SchoolView.Channel_name,
                             Added_by = client.Added_by,
                             Added_date = client.Added_date
                         };
@@ -67,16 +119,17 @@ namespace Logic.Model
                     {
                         _context.Clients.Add(client);
                     }
+
                     school.Client = client;
 
                 }
-                if (school.Stage_id == null)
+                if (SchoolView.Stage_id == null)
                 {
                     Stage stage = new Stage
                     {
-                        Added_by = school.Added_by,
-                        Added_date = school.Added_date,
-                        Name = stage_name
+                        Added_by = SchoolView.Added_by,
+                        Added_date = SchoolView.Added_date,
+                        Name = SchoolView.Stage_name
                     };
                     stage.Schools.Add(school);
                     _context.Stages.Add(stage);
@@ -90,18 +143,18 @@ namespace Logic.Model
             }
         }
 
-        public static async Task<bool> UpdateAsync(School school)
+        public static async Task<bool> UpdateAsync(SchoolView SchoolView)
         {
             using (var _context = new DB())
             {
-                var _school = await _context.Schools.FirstOrDefaultAsync(e => e.School_id == school.School_id);
+                var _school = await _context.Schools.FirstOrDefaultAsync(e => e.School_id == SchoolView.School_id);
                 if (_school != null)
                 {
-                    _school.Name = school.Name;
-                    _school.Stage_id = school.Stage_id;
-                    _school.Client_id = school.Client_id;
-                    _school.Is_joined = school.Is_joined;
-                    _school.Notes = school.Notes;
+                    _school.Name = SchoolView.School_name;
+                    _school.Stage_id = SchoolView.Stage_id;
+                    _school.Client_id = SchoolView.Client_id;
+                    _school.Is_joined = SchoolView.Is_joined;
+                    _school.Notes = SchoolView.Notes;
                     await _context.SaveChangesAsync();
                     return true;
                 }

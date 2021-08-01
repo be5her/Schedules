@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Schedules_classes.School>
+﻿@model IEnumerable<Logic.ViewModel.SchoolView>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.School_name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Is_joined)
@@ -25,13 +25,13 @@
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AspNetUser)
+                @Html.DisplayNameFor(model => model.Added_by)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client)
+                @Html.DisplayNameFor(model => model.Client_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stage)
+                @Html.DisplayNameFor(model => model.Stage_name)
             </th>
             <th></th>
         </tr>
@@ -40,7 +40,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.School_name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Is_joined)
@@ -52,13 +52,13 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)
+                @Html.DisplayFor(modelItem => item.Added_by_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.Name)
+                @Html.DisplayFor(modelItem => item.Client_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Stage.Name)
+                @Html.DisplayFor(modelItem => item.Stage_name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.School_id">Edit</a> |
