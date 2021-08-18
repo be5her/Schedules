@@ -84,15 +84,13 @@ namespace Logic.Model
             using (var _context = new DB())
             {
                 List<SelectListItem> list;
-                var sorted = _context.Semesters.ToList();
-                sorted.Sort();
                 if (selected == null)
-                {                   
-                    list = new SelectList(sorted, "Semester_id", "Code").ToList();
+                {
+                    list = new SelectList(_context.Semesters, "Semester_id", "Code").ToList();
                 }
                 else
                 {
-                    list = new SelectList(sorted, "Semester_id", "Code", selected).ToList();
+                    list = new SelectList(_context.Semesters, "Semester_id", "Code", selected).ToList();
                 }
                 return list;
             }

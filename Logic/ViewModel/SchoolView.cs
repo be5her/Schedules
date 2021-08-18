@@ -35,7 +35,7 @@ namespace Logic.ViewModel
 
         public string Added_by_name { get; set; }
 
-        public DateTime Added_date { get; set; }
+        public DateTime? Added_date { get; set; }
 
         public string Notes { get; set; }
     }

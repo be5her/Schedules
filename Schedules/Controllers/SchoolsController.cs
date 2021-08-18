@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Logic.Model;
 using Logic.ViewModel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,6 @@ using Schedules_classes;
 
 namespace View.Controllers
 {
-    [Authorize]
     public class SchoolsController : Controller
     {
 

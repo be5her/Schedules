@@ -1,4 +1,4 @@
-@model IEnumerable<Schedules_classes.Channel>
+﻿@model IEnumerable<Schedules_classes.Client>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,17 +9,29 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-striped">
+<table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Added_date)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.AspNetUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Channel)
             </th>
             <th></th>
         </tr>
@@ -31,18 +43,27 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @{
-                    var date = item.Added_date.ToString("MM/dd/yyyy");
-                }
-                @Html.DisplayFor(modelItem => date)
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Added_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Channel_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Channel_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Channel_id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Channel.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Client_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Client_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Client_id">Delete</a>
             </td>
         </tr>
 }
