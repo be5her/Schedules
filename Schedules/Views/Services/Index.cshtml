@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -37,7 +37,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Added_date)
+                @{
+                    var date = item.Added_date.ToString("MM/dd/yyyy");
+                }
+                @Html.DisplayFor(modelItem => date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AspNetUser.Full_name)

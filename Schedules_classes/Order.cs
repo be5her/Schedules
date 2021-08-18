@@ -29,27 +29,24 @@ namespace Schedules_classes
         [ForeignKey("Semester")]
         public int? Semester_id { get; set; }
 
-        public DateTime? Order_date { get; set; }
+        public DateTime Order_date { get; set; }
 
         public int? Number_of_teachers { get; set; }
 
         public decimal? Total_price { get; set; }
 
-        public decimal? Discount { get; set; }
+        public decimal Discount { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public decimal? Total_after_discount { get; set; }
+        public decimal Total_after_discount { get; set; }
 
-        public decimal? Haraj_percentage { get; set; }
+        public decimal Haraj_percentage { get; set; }
 
         public decimal? Cost { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal? Net_profit { get; set; }
 
         public decimal? Paid_amount { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal? Remaining_amount { get; set; }
 
         [ForeignKey("AspNetUser")]

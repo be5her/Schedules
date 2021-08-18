@@ -31,7 +31,7 @@ namespace Schedules_classes
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         [StringLength(10)]
         public string Notes { get; set; }

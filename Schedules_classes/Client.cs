@@ -32,7 +32,7 @@ namespace Schedules_classes
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         [ForeignKey("Channel")]
         public int? Channel_id { get; set; }

@@ -84,12 +84,13 @@ namespace Logic.Model
                 List<SelectListItem> list;
                 if (selected == null)
                 {
-                    list = new SelectList(_context.Channels, "Channel_id", "Name").ToList();
+                    list = new SelectList(_context.Services, "Service_id", "Name").ToList();
                 }
                 else
                 {
-                    list = new SelectList(_context.Channels, "Channel_id", "Name", selected).ToList();
+                    list = new SelectList(_context.Services, "Service_id", "Name", selected).ToList();
                 }
+                list.Remove(list.Find(e => e.Text == "سعر المعلم"));
                 return list;
             }
         }

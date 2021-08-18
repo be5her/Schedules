@@ -1,0 +1,53 @@
+﻿@model Logic.ViewModel.OrderView
+
+@{
+    ViewData["Title"] = "تفاصيل الطلب";
+}
+
+<h3>تفاصيل الطلب</h3>
+
+<div>
+
+</div>
+<div>
+    <div class="row mt-4">
+        <div class="col-3">
+            <div class="mt-3">
+                <label for="client_name">اسم العميل</label>
+                <input id="client_name" class="form-control" value="@Model.Client_name" readonly />
+            </div>
+            <div class="mt-3">
+                <label for="client_phone">جوال العميل</label>
+                <input id="client_phone" class="form-control" value="@Model.Client_phone" readonly />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mt-3">
+                <label for="school_name">اسم المدرسة</label>
+                <input id="school_name" class="form-control" value="@Model.School_name" readonly />
+            </div>
+            <div class="mt-3">
+                <label for="stage_name">مرحلة المدرسة</label>
+                <input id="stage_name" class="form-control" value="@Model.Stage_name" readonly />
+            </div>
+        </div>
+        <div class="row col-6">
+            <div class="col-4 mt-3">
+                <label for="total_price">الإجمالي</label>
+                <input id="total_price" class="form-control" value="@Model.Total_price" readonly />
+            </div>
+            <div class="col-4 mt-3">
+                <label for="discount">الخصم</label>
+                <input id="discount" class="form-control" value="@Model.Discount" readonly />
+            </div>
+            <div class="col-4 mt-3">
+                <label for="total_after_discount">الصافي</label>
+                <input id="total_after_discount" class="form-control" value="@Model.Total_after_discount" readonly />
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.School_id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

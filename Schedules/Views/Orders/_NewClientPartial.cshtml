@@ -1,0 +1,97 @@
+﻿@model Logic.ViewModel.NewClientView
+
+<!-- Modal -->
+<div class="modal fade" id="NewClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir="rtl">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">عميل جديد</h5>
+                <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="NewClient">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        @*<label asp-for="Client_id" class="control-label">اختر العميل</label>*@
+                        <select asp-for="School_id" class="form-control" asp-items="ViewBag.School_id" id="School_select_modal" placeholder="اختر مدرسة">
+                            <option value=""></option>
+                            <option value="new">مدرسة جديدة</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group new-school" hidden>
+                        @*<label asp-for="School_name" class="control-label"></label>*@
+                        <input asp-for="School_name" class="form-control" value="" placeholder="اسم المدرسة" required />
+                        <span asp-validation-for="School_name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group new-school" hidden>
+                        @*<label asp-for="Client_id" class="control-label"></label>*@
+                        <select asp-for="Stage_id" class="form-control" asp-items="ViewBag.Stage_id" placeholder="اختر المرحلة">
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        @*<label asp-for="Client_id" class="control-label">اختر العميل</label>*@
+                        <select asp-for="Client_id" class="form-control" asp-items="ViewBag.Client_id" id="Client_select_modal" placeholder="اختر العميل">
+                            <option value=""></option>
+                            <option value="new">عميل جديد</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group new-client" hidden>
+                        @*<label asp-for="School_name" class="control-label"></label>*@
+                        <input asp-for="Client_name" class="form-control" value="" placeholder="اسم العميل" required />
+                        <span asp-validation-for="Client_name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group new-client" hidden>
+                        @*<label asp-for="School_name" class="control-label"></label>*@
+                        <input asp-for="Client_phone" class="form-control" value="" placeholder="رقم العميل" required />
+                        <span asp-validation-for="Client_phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group new-client" hidden>
+                        @*<label asp-for="Client_id" class="control-label"></label>*@
+                        <select asp-for="Channel_id" class="form-control" asp-items="ViewBag.Channel_id" placeholder="اختر القناة">
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                <div></div>
+                <button type="button" class="btn btn-success" data-save="client">حفظ</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#School_select_modal').on('change', function (event) {
+        if ($(this).children("option:selected").val() == 'new') {
+            $('.new-school').removeAttr('hidden');
+        } else {
+            $('.new-school').attr('hidden', 'hidden');
+        }
+    });
+
+    $('#Client_select_modal').on('change', function (event) {
+        if ($(this).children("option:selected").val() == 'new') {
+            $('.new-client').removeAttr('hidden');
+        } else {
+            $('.new-client').attr('hidden', 'hidden');
+        }
+    });
+
+</script>

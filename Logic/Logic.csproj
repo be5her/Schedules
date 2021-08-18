@@ -254,11 +254,13 @@
   <ItemGroup>
     <Compile Include="Model\ChannelModel.cs" />
     <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Model\SchoolModel.cs" />
     <Compile Include="Model\SemesterModel.cs" />
     <Compile Include="Model\ServiceModel.cs" />
     <Compile Include="Model\StageModal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\NewClientView.cs" />
     <Compile Include="ViewModel\OrderView.cs" />
     <Compile Include="ViewModel\SchoolView.cs" />
   </ItemGroup>
