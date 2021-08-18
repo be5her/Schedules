@@ -1,0 +1,82 @@
+@model Logic.ViewModel.OrderView
+
+@{
+    ViewData["Title"] = "إنشاء طلب";
+}
+
+<h3>إنشاء طلب</h3>
+
+<hr />
+<div id="PlaceHolder"></div>
+<div class="row">
+    <div class="col-md-4">
+        @*<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#newSchool"
+                data-url="@Url.Action("Creat")" id="New_client">
+            عميل جديد
+        </button>*@
+
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#NewClientModal"
+                data-url="@Url.Action("NewClient")">
+            عميل جديد
+        </button>
+        <br />
+        <br />
+        <form asp-action="Create">
+            <input asp-for="Semester_id" value="@ViewBag.Semester_id" hidden />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="School_id" class="control-label">المدرسة</label>
+                <select asp-for="School_id" class="form-control" asp-items="ViewBag.School_id" id="School_select" placeholder="اختر مدرسة">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client_id" class="control-label">العميل</label>
+                <select asp-for="Client_id" class="form-control" asp-items="ViewBag.Client_id" id="Client_select" placeholder="اختر العميل">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number_of_teachers" class="control-label">عدد المعلمين</label>
+                <input asp-for="Number_of_teachers" class="form-control" />
+                @*<span asp-validation-for="Notes" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Services_id" class="control-label">الخدمات</label>
+                <select asp-for="Services_id" class="form-control" asp-items="ViewBag.Services" id="Service_select" multiple placeholder="اختر الخدمات">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label">الخصم</label>
+                <input asp-for="Discount" class="form-control" />
+                @*<span asp-validation-for="Notes" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="إنشاء" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @{
+        var Semester_id = new Dictionary<string, string>
+        {
+                { "Semester_id", ViewBag.Semester_id.ToString() }
+        };
+    }
+    <a asp-action="GetAllSemester" asp-all-route-data="Semester_id">العودة للسابق</a>
+</div>
+
+<style>
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner, .bootstrap-select .dropdown-menu li a {
+        text-align: right;
+    }
+</style>
+
+
+
+@section Scripts{
+    <script src="~/js/OrderAjax.js"></script>
+
+}
