@@ -9,7 +9,6 @@ namespace Schedules_classes
     [Table("Service")]
     public partial class Service
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
@@ -28,7 +27,7 @@ namespace Schedules_classes
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime Added_date { get; set; }
+        public DateTime? Added_date { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 

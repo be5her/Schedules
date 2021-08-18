@@ -1,4 +1,4 @@
-﻿using Schedules_classes;
+using Schedules_classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

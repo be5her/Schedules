@@ -1,4 +1,4 @@
-﻿using Logic.ViewModel;
+using Logic.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Schedules_classes;
 using System;

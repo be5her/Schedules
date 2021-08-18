@@ -1,130 +1,127 @@
 ﻿@model Logic.ViewModel.SchoolView
 
 @{
-    ViewData["Title"] = "إنشاء مدرسة";
+    ViewData["Title"] = "Create";
 }
 
-<h4>عميل جديد</h4>
+<h1>Create</h1>
+
+<h4>School</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <input hidden value="@ViewBag.is_embedded" name="is_embedded" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                @*<label asp-for="School_name" class="control-label">اسم المدرسة</label>*@
-                <input asp-for="School_name" class="form-control" placeholder="اسم المدرسة" />
+                <label asp-for="School_name" class="control-label"></label>
+                <input asp-for="School_name" class="form-control" />
                 <span asp-validation-for="School_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @*<label asp-for="Stage_id" class="control-label">المرحلة الدراسية</label>*@
-                <select asp-for="Stage_id" class="form-control" asp-items="ViewBag.Stage_id" id="Stage_select" title="المرحلة الدراسية">
-                    <option selected disabled hidden>اختر المرحلة الدراسية</option>
+                <label asp-for="Stage_id" class="control-label"></label>
+                <select asp-for="Stage_id" class="form-control" asp-items="ViewBag.Stage_id" id="Stage_select">
+                    <option value="">Other</option>
                 </select>
             </div>
-            <!--<div class="form-group">
-                <label asp-for="Stage_name" class="control-label">Stage_name</label>
-                <input asp-for="Stage_name" class="form-control stage_info" />-->
-            @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
-            <!--</div>-->
             <div class="form-group">
-                @*<label asp-for="Client_id" class="control-label">اختر العميل</label>*@
+                <label asp-for="Stage_name" class="control-label">Stage_name</label>
+                <input asp-for="Stage_name" class="form-control stage_info" />
+                @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Client_id" class="control-label"></label>
                 <select asp-for="Client_id" class="form-control" asp-items="ViewBag.Client_id" id="Client_select">
-                    <option selected hidden disabled>اختر العميل</option>
-                    <option value="">عميل جديد</option>
+                    <option value="">Other</option>
                 </select>
             </div>
-            <div>
-                <div class="form-group">
-                    <label asp-for="Client_name" class="control-label">اسم العميل</label>
-                    <input asp-for="Client_name" class="form-control client_info" />
-                    @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
-                </div>
-                <div class="form-group">
-                    <label asp-for="Channel_id" class="control-label">قناة العميل</label>
-                    <select asp-for="Channel_id" class="form-control" asp-items="ViewBag.Channel_id" id="Channel_select">
-                        <option value="">قناة جديدة</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Channel_name" class="control-label">اسم القناة</label>
-                    <input asp-for="Channel_name" class="form-control channel_info" />
-                    @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
-                </div>
+            <div class="form-group">
+                <label asp-for="Client_name" class="control-label">Client_name</label>
+                <input asp-for="Client_name" class="form-control client_info" />
+                @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Channel_id" class="control-label">Channel_id</label>
+                <select asp-for="Channel_id" class="form-control" asp-items="ViewBag.Channel_id" id="Channel_select">
+                    <option value="">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Channel_name" class="control-label">Channel_name</label>
+                <input asp-for="Channel_name" class="form-control channel_info" />
+                @*<span asp-validation-for="Channel_name" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <input asp-for="Is_joined" class="" value="true" />
+                <label asp-for="Is_joined" class="control-label"></label>
+                <span asp-validation-for="Is_joined" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <input asp-for="Is_joined" class="" value="true" />
-                    <label asp-for="Is_joined" class="control-label"></label>
-                    <span asp-validation-for="Is_joined" class="text-danger"></span>
-                </div>*@
+            <label asp-for="Added_by" class="control-label"></label>
+            <select asp-for="Added_by" class ="form-control" asp-items="ViewBag.Added_by"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Added_date" class="control-label"></label>
+            <input asp-for="Added_date" class="form-control" />
+            <span asp-validation-for="Added_date" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
-                <label asp-for="Notes" class="control-label">ملاحظات</label>
+                <label asp-for="Notes" class="control-label"></label>
                 <input asp-for="Notes" class="form-control" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="إنشاء" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-@if (!bool.Parse(ViewBag.is_embedded))
-{
-    <div>
-        <a asp-action="Index">العودة للسابق</a>
-    </div>
-}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    @if (bool.Parse(ViewBag.is_embedded))
-    {
-        <script>
-            $('.navbar-toggler').attr('hidden');
-        </script>
+<script>
+
+    $("#Stage_select").change(StageSelectChange);
+
+    function StageSelectChange(e) {
+        let value = e.target.value;
+        if (value == '') {
+            $(".stage_info").removeAttr('disabled');
+        } else {
+            $(".stage_info").attr('disabled', 'disabled');
+        }
     }
-    
-    <script>
 
-        $("#Stage_select").change(StageSelectChange);
+    $("#Client_select").change(ClientSelectChange);
 
-        function StageSelectChange(e) {
-            let value = e.target.value;
-            if (value == '') {
-                $(".stage_info").removeAttr('disabled');
-            } else {
-                $(".stage_info").attr('disabled', 'disabled');
-            }
-        }
-
-        $("#Client_select").change(ClientSelectChange);
-
-        function ClientSelectChange(e) {
-            let value = e.target.value;
-            if (value == '') {
-                $(".client_info").removeAttr('disabled');
-                $("#Channel_select").removeAttr('disabled');
-                if ($("#Channel_select").val() == '') {
-                    $(".channel_info").removeAttr('disabled');
-                }
-            } else {
-                $(".client_info").attr('disabled', 'disabled');
-                $("#Channel_select").attr('disabled', 'disabled');
-                $(".channel_info").attr('disabled', 'disabled');
-            }
-        }
-
-        $("#Channel_select").change(ChannelSelectChange);
-
-        function ChannelSelectChange(e) {
-            let value = e.target.value;
-            if (value == '') {
+    function ClientSelectChange(e) {
+        let value = e.target.value;
+        if (value == '') {
+            $(".client_info").removeAttr('disabled');
+            $("#Channel_select").removeAttr('disabled');
+            if ($("#Channel_select").val() == '') {
                 $(".channel_info").removeAttr('disabled');
-            } else {
-                $(".channel_info").attr('disabled', 'disabled');
             }
+        } else {
+            $(".client_info").attr('disabled', 'disabled');
+            $("#Channel_select").attr('disabled', 'disabled');
+            $(".channel_info").attr('disabled', 'disabled');
         }
-    </script>
+    }
+
+    $("#Channel_select").change(ChannelSelectChange);
+
+    function ChannelSelectChange(e) {
+        let value = e.target.value;
+        if (value == '') {
+            $(".channel_info").removeAttr('disabled');
+        } else {
+            $(".channel_info").attr('disabled', 'disabled');
+        }
+    }
+</script>
 }

@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Logic.Model;
 using Logic.ViewModel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,6 @@ using Schedules_classes;
 
 namespace View.Controllers
 {
-    [Authorize]
     public class SchoolsController : Controller
     {
 
@@ -42,12 +40,11 @@ namespace View.Controllers
         }
 
         // GET: Schools/Create
-        public IActionResult Create(string is_embedded = "false")
+        public IActionResult Create()
         {
             ViewData["Client_id"] = ClientModel.GetSelectList();
             ViewData["Stage_id"] = StageModal.GetSelectList();
             ViewData["Channel_id"] = ChannelModel.GetSelectList();
-            ViewData["is_embedded"] = is_embedded;
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace View.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("School_name,Stage_id,Stage_name,Client_id,Client_name,Is_joined,Channel_id,Channel_name,Notes")] SchoolView SchoolView, string is_embedded = "false")
+        public async Task<IActionResult> Create([Bind("School_name,Stage_id,Stage_name,Client_id,Client_name,Is_joined,Channel_id,Channel_name,Notes")] SchoolView SchoolView)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             SchoolView.Added_by = userId;
@@ -66,10 +63,6 @@ namespace View.Controllers
             if (ModelState.IsValid)
             {
                 await SchoolModel.CreateAsync(SchoolView);
-                if (bool.Parse(is_embedded))
-                {
-                    return View("Close_Window");
-                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Client_id"] = ClientModel.GetSelectList(SchoolView.Client_id);

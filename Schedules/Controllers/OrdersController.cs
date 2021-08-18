@@ -1,4 +1,4 @@
-﻿using Logic.Model;
+using Logic.Model;
 using Logic.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
