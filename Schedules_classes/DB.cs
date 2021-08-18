@@ -12,6 +12,9 @@ namespace Schedules_classes
         {
         }
 
+        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Channel> Channels { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
@@ -23,19 +26,37 @@ namespace Schedules_classes
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Stage> Stages { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetRole>()
+                .HasMany(e => e.AspNetRoleClaims)
+                .WithRequired(e => e.AspNetRole)
+                .HasForeignKey(e => e.RoleId);
+
+            modelBuilder.Entity<AspNetRole>()
+                .HasMany(e => e.AspNetUsers)
+                .WithMany(e => e.AspNetRoles)
+                .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserClaims)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Channels)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Clients)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Orders)
@@ -44,8 +65,9 @@ namespace Schedules_classes
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Schools)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Semesters)
@@ -54,32 +76,25 @@ namespace Schedules_classes
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Services)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Stages)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Workers)
-                .WithOptional(e => e.AspNetUser)
-                .HasForeignKey(e => e.Added_by);
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.Added_by)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Channel>()
                 .Property(e => e.Name)
                 .IsFixedLength();
-
-            modelBuilder.Entity<Client>()
-                .HasMany(e => e.Orders)
-                .WithOptional(e => e.Client)
-                .HasForeignKey(e => e.Client_id);
-
-            modelBuilder.Entity<Client>()
-                .HasMany(e => e.Schools)
-                .WithOptional(e => e.Client)
-                .HasForeignKey(e => e.Client_id);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Total_price)
@@ -91,7 +106,7 @@ namespace Schedules_classes
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Total_after_discount)
-                .HasPrecision(11, 3);
+                .HasPrecision(10, 3);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Haraj_percentage)
@@ -103,7 +118,7 @@ namespace Schedules_classes
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Net_profit)
-                .HasPrecision(13, 3);
+                .HasPrecision(10, 3);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Paid_amount)
@@ -111,7 +126,7 @@ namespace Schedules_classes
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Remaining_amount)
-                .HasPrecision(14, 3);
+                .HasPrecision(10, 3);
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.Payments)

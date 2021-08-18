@@ -12,14 +12,15 @@ namespace Schedules_classes
         [Key]
         public int Payment_id { get; set; }
 
-        [ForeignKey("Order")]
         public int Order_id { get; set; }
 
         public decimal Amount { get; set; }
 
         public string Method { get; set; }
 
-        public DateTime? Payment_date { get; set; }
+        public string Payment_py { get; set; }
+
+        public DateTime Payment_date { get; set; }
 
         public virtual Order Order { get; set; }
     }

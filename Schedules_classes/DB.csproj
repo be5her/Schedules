@@ -54,7 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRole.cs" />
+    <Compile Include="AspNetRoleClaim.cs" />
     <Compile Include="AspNetUser.cs" />
+    <Compile Include="AspNetUserClaim.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="DB.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="Semester.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="Stage.cs" />
+    <Compile Include="sysdiagram.cs" />
     <Compile Include="Worker.cs" />
   </ItemGroup>
   <ItemGroup>

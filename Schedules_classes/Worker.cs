@@ -27,11 +27,11 @@ namespace Schedules_classes
         [StringLength(10)]
         public string Phone { get; set; }
 
-        [ForeignKey("AspNetUser")]
+        [Required]
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         [StringLength(10)]
         public string Notes { get; set; }

@@ -6,18 +6,18 @@ namespace Schedules_classes
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Order_services
+    public partial class AspNetUserClaim
     {
         public int Id { get; set; }
 
-        public int? Order_id { get; set; }
+        [Required]
+        [StringLength(450)]
+        public string UserId { get; set; }
 
-        public int? Service_id { get; set; }
+        public string ClaimType { get; set; }
 
-        public decimal? Current_Price { get; set; }
+        public string ClaimValue { get; set; }
 
-        public virtual Order Order { get; set; }
-
-        public virtual Service Service { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

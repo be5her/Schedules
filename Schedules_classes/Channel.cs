@@ -22,9 +22,9 @@ namespace Schedules_classes
         [StringLength(10)]
         public string Name { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
-        [ForeignKey("AspNetUser")]
+        [Required]
         [StringLength(450)]
         public string Added_by { get; set; }
 

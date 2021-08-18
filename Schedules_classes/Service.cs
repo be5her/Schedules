@@ -23,11 +23,11 @@ namespace Schedules_classes
 
         public decimal? Price { get; set; }
 
-        [ForeignKey("AspNetUser")]
+        [Required]
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 

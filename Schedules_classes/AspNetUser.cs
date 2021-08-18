@@ -11,6 +11,7 @@ namespace Schedules_classes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
+            AspNetUserClaims = new HashSet<AspNetUserClaim>();
             Channels = new HashSet<Channel>();
             Clients = new HashSet<Client>();
             Orders = new HashSet<Order>();
@@ -19,9 +20,9 @@ namespace Schedules_classes
             Services = new HashSet<Service>();
             Stages = new HashSet<Stage>();
             Workers = new HashSet<Worker>();
+            AspNetRoles = new HashSet<AspNetRole>();
         }
 
-        [Key]
         [StringLength(450)]
         public string Id { get; set; }
 
@@ -34,7 +35,7 @@ namespace Schedules_classes
         [StringLength(100)]
         public string Last_name { get; set; }
 
-        public string Full_name { get {return this.First_name + " " + this.Last_name;} }
+        public string Full_name { get { return this.First_name + " " + this.Last_name; } }
 
         [StringLength(256)]
         public string NormalizedUserName { get; set; }
@@ -66,6 +67,9 @@ namespace Schedules_classes
         public int AccessFailedCount { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Channel> Channels { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -88,5 +92,9 @@ namespace Schedules_classes
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Worker> Workers { get; set; }
+
+        [NotMapped]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

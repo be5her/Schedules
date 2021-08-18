@@ -21,19 +21,17 @@ namespace Schedules_classes
         [Required]
         public string Name { get; set; }
 
-        [ForeignKey("Stage")]
         public int? Stage_id { get; set; }
 
-        [ForeignKey("Client")]
         public int? Client_id { get; set; }
 
         public bool Is_joined { get; set; }
 
-        [ForeignKey("AspNetUser")]
+        [Required]
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         public string Notes { get; set; }
 

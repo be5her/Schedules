@@ -26,11 +26,10 @@ namespace Schedules_classes
 
         public bool Is_active { get; set; }
 
-        [ForeignKey("AspNetUser")]
         [StringLength(450)]
         public string Added_by { get; set; }
 
-        public DateTime? Added_date { get; set; }
+        public DateTime Added_date { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
 
